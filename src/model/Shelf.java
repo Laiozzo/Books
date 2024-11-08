@@ -59,6 +59,36 @@ public class Shelf {
         return maxItem;
     }
 
+    public int getNumberOfComics() {
+        int sum = 0;
+        for(Merchandise obj : obj){
+            if(obj instanceof Comic){
+                sum++;
+            }
+        }
+        return sum;
+    }
+
+    public int getNumberOfNewspapers() {
+        int sum = 0;
+        for(Merchandise obj : obj){
+            if(obj instanceof Newspaper){
+                sum++;
+            }
+        }
+        return sum;
+    }
+
+    public int getNumberOfBooks() {
+        int sum = 0;
+        for(Merchandise obj : obj){
+            if(obj instanceof Book){
+                sum++;
+            }
+        }
+        return sum;
+    }
+
     public double merchWeight(){
         double maxWeight = 0;
         for(Merchandise obj : obj){
@@ -151,6 +181,9 @@ public class Shelf {
         b2.setPageNumber(1500);
         b2.setAuthor("Stefano");
         b2.setGenre("Horror");
+
+        System.out.println(s.getNumberOfComics());
+
 
         try
         {
