@@ -182,9 +182,6 @@ public class Shelf {
         b2.setAuthor("Stefano");
         b2.setGenre("Horror");
 
-        System.out.println(s.getNumberOfComics());
-
-
         try
         {
             b2.setShelf(s);

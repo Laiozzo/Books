@@ -11,8 +11,6 @@ public class Merchandise {
 
     public Merchandise() {}
 
-
-
     public Merchandise(int id, String title, double price, double weight, int pageNumber) {
         this.id = id;
         this.title = title;
