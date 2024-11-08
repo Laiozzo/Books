@@ -25,8 +25,13 @@ public class Book extends Merchandise {
         this.author = author;
     }
 
-    public static void main(String[] args) {
-        //Book a = new Book(10, "s", )
+    public void setShelf(Shelf shelf)throws Exception
+    {
+        if(shelf.getMaxItem() < 1){
+            throw new Exception();
+        }
+        shelf.addBook(this);
+        shelf.setMaxItem(shelf.getMaxItem()-1);
     }
 
 }

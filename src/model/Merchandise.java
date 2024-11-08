@@ -1,4 +1,5 @@
 package model;
+import model.*;
 
 public class Merchandise {
     protected int id;
@@ -55,10 +56,5 @@ public class Merchandise {
         this.pageNumber = pageNumber;
     }
 
-    public void setShelf(Shelf shelf)
-    {
-        if(shelf.riskLevel() >= 3)
-            throw new RuntimeException("Peso superato");
-        this.shelf = shelf.getShelfID();
-    }
 }
+

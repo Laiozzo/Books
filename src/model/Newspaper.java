@@ -26,4 +26,11 @@ public class Newspaper extends Merchandise{
     public void setDay(String day) {
         this.day = day;
     }
+    public void setShelf(Shelf shelf) throws Exception {
+        if(shelf.getMaxItem() < 0 )
+            throw new Exception();
+        shelf.addNewspaper(this);
+        shelf.setMaxItem(shelf.getMaxItem() - 1);
+
+    }
 }

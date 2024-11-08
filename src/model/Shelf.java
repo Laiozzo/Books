@@ -1,5 +1,6 @@
 package model;
 
+import javax.imageio.plugins.tiff.GeoTIFFTagSet;
 import java.util.ArrayList;
 
 public class Shelf {
@@ -7,11 +8,27 @@ public class Shelf {
     private int number;
     private String material;
     private int maxItem;
-    ArrayList<Comic> comics;
-    ArrayList<Book> books;
-    ArrayList<Newspaper> newspapers;
+    ArrayList<Merchandise> obj = new ArrayList<>();
+
+    public Shelf(int shelfID, int number, String material, int maxItem) {
+        this.shelfID = shelfID;
+        this.number = number;
+        this.material = material;
+        this.maxItem = maxItem;
+
+    }
 
     public Shelf() {}
+
+    public void addComic(Comic comic) {
+        obj.add(comic);
+    }
+    public void addNewspaper(Newspaper newspaper) {
+        obj.add(newspaper);
+    }
+    public void addBook(Book book) {
+        obj.add(book);
+    }
 
     public void setId(int shelfID) {
         this.shelfID = shelfID;
@@ -19,15 +36,12 @@ public class Shelf {
     public void setMaxItems(int maxItem) {
         this.maxItem = maxItem;
     }
-
     public int getShelfID() {
         return shelfID;
     }
-
     public void setNumber(int number) {
         this.number = number;
     }
-
     public int getNumber() {
         return number;
     }
@@ -41,54 +55,49 @@ public class Shelf {
     public void setMaxItem(int maxItem) {
         this.maxItem = maxItem;
     }
-
-    public Shelf(int ShelfID, int number, String material, int maxItem) {
-        this.shelfID = ShelfID;
-        this.number = number;
-        this.material = material;
-        this.maxItem = maxItem;
+    public int getMaxItem() {
+        return maxItem;
     }
 
     public double merchWeight(){
         double maxWeight = 0;
-        for(Comic comic : comics){
-            maxWeight += comic.getWeight();
+        for(Merchandise obj : obj){
+            maxWeight += obj.getWeight();
         }
-        for(Book book : books){
-            maxWeight += book.getWeight();
-        }
-        for(Newspaper newspaper : newspapers){
-            maxWeight += newspaper.getWeight();
-        }
+
         return maxWeight;
     }
 
     public double maxWeight(){
-        return switch (material) {
-            case "wood" -> 0.25;
-            case "pvc" -> 0.75;
-            case "steel" -> 1.5;
-            case "adamantium" -> 50;
-            default -> 0;
-        };
-    }
-
-    public int riskLevel() {
-        if (maxWeight() <= maxWeight() * 0.5)
-            return 1;
-
-        if (maxWeight() <= maxWeight() * 0.75)
-            return 2;
-
-        if (maxWeight() >= maxWeight() * 0.75)
-            return 3;
-
+        if(getMaterial().equals("pvc")){
+            return 0.75 * getMaxItem();
+        }
+        if(getMaterial().equals("wood")){
+            return 0.5 * getMaxItem();
+        }
+        if(getMaterial().equals("steel")){
+            return 1.5 * getMaxItem();
+        }
+        if(getMaterial().equals("adamantium")){
+            return 50 * getMaxItem();
+        }
         return 0;
     }
 
+    public double riskLevel() {
+        System.out.println(merchWeight());
+        if (merchWeight() <= (maxWeight() * 0.5)) {
+            return 1;
+        } else if (maxWeight() <= maxWeight() * 0.75 || maxWeight() < 3.0) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
 
-    public static void main(String[] args)
-    {
+
+
+    public static void main(String[] args) throws Exception{
         Shelf s = new Shelf();
         s.setId(1);
         s.setNumber(101);
@@ -149,12 +158,8 @@ public class Shelf {
             System.out.println("Sbagliato, vi ha inserito il libro nonostante lo spazio sia finito");
         }catch (Exception e)
         {
+            System.out.println("Riusciro mai a stampare queste righe?");
             System.out.println("Giusto, vi ha lanciato eccezione e non ha inserito il libro");
-
         }
-
-
-
     }
-
 }
